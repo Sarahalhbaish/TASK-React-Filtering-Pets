@@ -5,16 +5,23 @@ import SearchBar from "./SearchBar"
 import Selector from "./Selector";
 
 function PetsList() {
+  const [petsList, setPetsList] = useState(pets);
   const [type, setType] = useState("");
   const [query, setQuery] = useState("");
 
-  const filtering = pets.filter((itemName) => {
+  const handleAdopt = (id) => {
+    const alert = window.confirm(`Are you sure you want to adopt the pet?`);
+    if (alert)
+      setPetsList(petsList.filter(pet => pet.id !== id))
+  }
+
+  const filtering = petsList.filter((itemName) => {
     const lookName = itemName.name.toLocaleLowerCase().includes(query.toLocaleLowerCase());
     const lookType = itemName.type.includes(type)
     return (lookName && lookType);
 });
 
-  const petList = filtering.map((pet) => <PetItem pet={pet} key={pet.id} />);
+  const petList = filtering.map((pet) => <PetItem pet={pet} key={pet.id} handleclick={handleAdopt}/>);
 
   return (
     <section id="doctors" className="doctor-section pt-140">
