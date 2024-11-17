@@ -19,7 +19,7 @@ function PetsList() {
     const lookName = itemName.name.toLocaleLowerCase().includes(query.toLocaleLowerCase());
     const lookType = itemName.type.includes(type)
     return (lookName && lookType);
-});
+}); 
 
   const petList = filtering.map((pet) => <PetItem pet={pet} key={pet.id} handleclick={handleAdopt}/>);
 
